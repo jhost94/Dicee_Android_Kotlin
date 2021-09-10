@@ -2,6 +2,7 @@ package com.jhost.dicee
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -14,10 +15,10 @@ class MainActivity: AppCompatActivity() {
         setContentView(R.layout.activity_main)
         log("Hello world!")
 
-        init()
+        initialize()
     }
 
-    private fun init() {
+    private fun initialize() {
         log("I WAS HERE")
         val dices = intArrayOf(
             R.drawable.dice1,
@@ -34,11 +35,16 @@ class MainActivity: AppCompatActivity() {
 
         setRandomDice(leftDice, dices)
         setRandomDice(rightDice, dices)
+
+        rollButton.setOnClickListener {
+            setRandomDice(leftDice, dices)
+            setRandomDice(rightDice, dices)
+        }
     }
 
     private fun setRandomDice(imageView: ImageView, dices: IntArray){
         log(Random(dices.size).nextInt().toString())
-        imageView.setImageResource(dices[Random(dices.size).nextInt()])
+        imageView.setImageResource(dices[Random.nextInt(dices.size)])
     }
 
     private fun log(msg: String) {
